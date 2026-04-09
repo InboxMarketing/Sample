@@ -53,12 +53,14 @@
             </div>
         </div>
         <script src="resources/qgis2web_expressions.js"></script>
+<script src="resources/proj4.js"></script>
+        <script>proj4.defs('EPSG:3844','+proj=sterea +lat_0=46 +lon_0=25 +k=0.99975 +x_0=500000 +y_0=500000 +ellps=krass +units=m +no_defs');</script>
         <script src="./resources/functions.js"></script>
         <script src="./resources/ol.js"></script>
         <script src="./resources/ol-layerswitcher.js"></script>
         <script src="resources/photon-geocoder-autocomplete.min.js"></script>
-        <script src="layers/Ipotesti_1.js"></script>
-        <script src="styles/Ipotesti_1_style.js"></script>
+        <script src="layers/AdreseIpotesti_1.js"></script><script src="layers/UATIpotesti_2.js"></script>
+        <script src="styles/AdreseIpotesti_1_style.js"></script><script src="styles/UATIpotesti_2_style.js"></script>
         <script src="./layers/layers.js" type="text/javascript"></script> 
         <script src="./resources/Autolinker.min.js"></script>
         <script src="./resources/qgis2web.js"></script>        

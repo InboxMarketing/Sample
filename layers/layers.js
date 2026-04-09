@@ -1,3 +1,5 @@
+ol.proj.proj4.register(proj4);
+//ol.proj.get("EPSG:3844").setExtent([594030.118090, 678640.935217, 600822.981294, 683247.919298]);
 var wms_layers = [];
 
 
@@ -12,35 +14,49 @@ var wms_layers = [];
                 url: 'https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}'
             })
         });
-var format_Ipotesti_1 = new ol.format.GeoJSON();
-var features_Ipotesti_1 = format_Ipotesti_1.readFeatures(json_Ipotesti_1, 
-            {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857'});
-var jsonSource_Ipotesti_1 = new ol.source.Vector({
+var format_AdreseIpotesti_1 = new ol.format.GeoJSON();
+var features_AdreseIpotesti_1 = format_AdreseIpotesti_1.readFeatures(json_AdreseIpotesti_1, 
+            {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3844'});
+var jsonSource_AdreseIpotesti_1 = new ol.source.Vector({
     attributions: ' ',
 });
-jsonSource_Ipotesti_1.addFeatures(features_Ipotesti_1);
-cluster_Ipotesti_1 = new ol.source.Cluster({
+jsonSource_AdreseIpotesti_1.addFeatures(features_AdreseIpotesti_1);
+cluster_AdreseIpotesti_1 = new ol.source.Cluster({
   distance: 30,
-  source: jsonSource_Ipotesti_1
+  source: jsonSource_AdreseIpotesti_1
 });
-var lyr_Ipotesti_1 = new ol.layer.Vector({
+var lyr_AdreseIpotesti_1 = new ol.layer.Vector({
                 declutter: false,
-                source:cluster_Ipotesti_1, 
-                style: style_Ipotesti_1,
-                popuplayertitle: 'Ipotesti',
+                source:cluster_AdreseIpotesti_1, 
+                style: style_AdreseIpotesti_1,
+                popuplayertitle: 'Adrese Ipotesti',
                 interactive: true,
-                title: '<img src="styles/legend/Ipotesti_1.png" /> Ipotesti'
+                title: '<img src="styles/legend/AdreseIpotesti_1.png" /> Adrese Ipotesti'
             });
-var group_Administrativ = new ol.layer.Group({
-                                layers: [lyr_Ipotesti_1,],
-                                fold: 'open',
-                                title: 'Administrativ'});
+var format_UATIpotesti_2 = new ol.format.GeoJSON();
+var features_UATIpotesti_2 = format_UATIpotesti_2.readFeatures(json_UATIpotesti_2, 
+            {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3844'});
+var jsonSource_UATIpotesti_2 = new ol.source.Vector({
+    attributions: ' ',
+});
+jsonSource_UATIpotesti_2.addFeatures(features_UATIpotesti_2);
+var lyr_UATIpotesti_2 = new ol.layer.Vector({
+                declutter: false,
+                source:jsonSource_UATIpotesti_2, 
+                style: style_UATIpotesti_2,
+                popuplayertitle: 'UAT Ipotesti',
+                interactive: true,
+                title: '<img src="styles/legend/UATIpotesti_2.png" /> UAT Ipotesti'
+            });
 
-lyr_GoogleSatelliteHybrid_0.setVisible(true);lyr_Ipotesti_1.setVisible(true);
-var layersList = [lyr_GoogleSatelliteHybrid_0,group_Administrativ];
-lyr_Ipotesti_1.set('fieldAliases', {'Id': 'Id', 'Tstr': 'Tstr', 'Str': 'Str', 'Bl': 'Bl', 'Sc': 'Sc', 'Nr': 'Nr', 'Etaje': 'Etaje', 'Loc': 'Loc', });
-lyr_Ipotesti_1.set('fieldImages', {'Id': 'TextEdit', 'Tstr': 'TextEdit', 'Str': 'TextEdit', 'Bl': 'TextEdit', 'Sc': 'TextEdit', 'Nr': 'TextEdit', 'Etaje': 'TextEdit', 'Loc': 'TextEdit', });
-lyr_Ipotesti_1.set('fieldLabels', {'Id': 'no label', 'Tstr': 'no label', 'Str': 'no label', 'Bl': 'no label', 'Sc': 'no label', 'Nr': 'inline label - visible with data', 'Etaje': 'no label', 'Loc': 'no label', });
-lyr_Ipotesti_1.on('precompose', function(evt) {
+lyr_GoogleSatelliteHybrid_0.setVisible(true);lyr_AdreseIpotesti_1.setVisible(true);lyr_UATIpotesti_2.setVisible(true);
+var layersList = [lyr_GoogleSatelliteHybrid_0,lyr_AdreseIpotesti_1,lyr_UATIpotesti_2];
+lyr_AdreseIpotesti_1.set('fieldAliases', {'Id': 'Id', 'Tstr': 'Tstr', 'Str': 'Str', 'Nr': 'Nr', });
+lyr_UATIpotesti_2.set('fieldAliases', {'Judet': 'Judet', 'UAT': 'UAT', });
+lyr_AdreseIpotesti_1.set('fieldImages', {'Id': 'TextEdit', 'Tstr': 'TextEdit', 'Str': 'TextEdit', 'Nr': 'TextEdit', });
+lyr_UATIpotesti_2.set('fieldImages', {'Judet': 'TextEdit', 'UAT': 'TextEdit', });
+lyr_AdreseIpotesti_1.set('fieldLabels', {'Id': 'no label', 'Tstr': 'no label', 'Str': 'no label', 'Nr': 'inline label - visible with data', });
+lyr_UATIpotesti_2.set('fieldLabels', {'Judet': 'no label', 'UAT': 'inline label - always visible', });
+lyr_UATIpotesti_2.on('precompose', function(evt) {
     evt.context.globalCompositeOperation = 'normal';
 });
